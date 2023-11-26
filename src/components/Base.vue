@@ -1,6 +1,6 @@
 <template>
     <div class="container mx-auto">
-        <div v-if="!account.connected" class="card w-[500px] bg-base-100-50 shadow-xl mx-auto my-[100px] p-10">
+        <div v-if="!account.connected" class="card md:w-[500px] bg-base-100-50 shadow-xl mx-auto my-[100px] p-10">
             <div class="text-center">
                 <h2 class="text-2xl font-bold">Welcome to Deif's Estfor Plaza!</h2>
                 <p class="text-lg">Connect your wallet below</p>

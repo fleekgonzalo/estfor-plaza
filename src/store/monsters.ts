@@ -1,4 +1,4 @@
-import { ActionInput, Skill } from "@paintswap/estfor-definitions/types"
+import { ActionInput, CombatStats, Skill } from "@paintswap/estfor-definitions/types"
 import { defineStore } from "pinia"
 
 import { allActions } from '../data/actions'
@@ -17,6 +17,10 @@ export interface MonsterRank {
     damageTakenPerHour: number,
     xpPerHour: number,
     imgSource: string,
+    meleeDamagePerHour: number,
+    rangedDamagePerHour: number,
+    magicDamagePerHour: number,
+    combatStats: CombatStats,
 }
 
 const calculateDamage = (atk: number, def: number) => {
@@ -97,7 +101,10 @@ export const useMonsterStore = defineStore({
 
             for (const m of state.monsters) {
                 const damagePerMinute = calculateDamage(attackSkill, isMelee ? m.combatStats.meleeDefence : isRanged ? m.combatStats.rangedDefence : isMagic ? m.combatStats.magicDefence : 0)
-                const damageTakenPerMinute = calculateDamage(m.combatStats.melee, combatStats.meleeDefence) + calculateDamage(m.combatStats.ranged, combatStats.rangedDefence) + calculateDamage(m.combatStats.magic, combatStats.magicDefence)
+                const meleeDamagePerHour = calculateDamage(m.combatStats.melee, combatStats.meleeDefence)
+                const rangedDamagePerHour = calculateDamage(m.combatStats.ranged, combatStats.rangedDefence)
+                const magicDamagePerHour = calculateDamage(m.combatStats.magic, combatStats.magicDefence)
+                const damageTakenPerMinute = meleeDamagePerHour + rangedDamagePerHour + magicDamagePerHour
                 
                 let killsPerHour = Math.floor(damagePerMinute / m.combatStats.health * 60)
                 let damageTakenPerHour = damageTakenPerMinute * 60
@@ -111,12 +118,28 @@ export const useMonsterStore = defineStore({
                     name: monsterNames[m.actionId] || 'Unknown',
                     damagePerMinute,
                     damageTakenPerHour,
+                    meleeDamagePerHour,
+                    rangedDamagePerHour,
+                    magicDamagePerHour,
                     xpPerHour,
+                    combatStats: m.combatStats,
                     imgSource: `${MEDIA_URL}/monsters/${monsterImageMap[m.actionId] || 'monster_1_9zp1zn5o.jpg'}`,
                 })
             }
 
-            monsterRankings.sort((a, b) => b.xpPerHour > a.xpPerHour ? 1 : -1)
+            monsterRankings.sort((a, b) => {
+                if (b.xpPerHour > a.xpPerHour)
+                    return 1
+                if (b.xpPerHour < a.xpPerHour)
+                    return -1
+
+                if (b.damageTakenPerHour > a.damageTakenPerHour)
+                    return -1
+                if (b.damageTakenPerHour < a.damageTakenPerHour)
+                    return 1
+                
+                return 0
+            })
             return monsterRankings
         },
     },

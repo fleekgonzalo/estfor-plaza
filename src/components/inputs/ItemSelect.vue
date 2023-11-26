@@ -1,5 +1,5 @@
 <template>
-    <select class="select select-bordered w-full" v-model="value" :disabled="props.disabled">
+    <select class="select select-bordered w-full md:select-md select-xs" v-model="value" :disabled="props.disabled">
         <option disabled selected :value="undefined">{{ props.label }}</option>
         <option v-for="item in props.items" :key="item.tokenId" :value="item.tokenId">
             {{ item.name }}

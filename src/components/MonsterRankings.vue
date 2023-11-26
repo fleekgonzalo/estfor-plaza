@@ -2,21 +2,32 @@
     <div class="card bg-base-100-50 shadow-xl rounded-lg">
         <div class="card-body">
             <div class="overflow-x-auto">
-                <table class="table">
+                <table class="table md:table-md table-xs">
                     <thead>
                     <tr>
-                        <th class="w-12"></th>
-                        <th class="text-right">Damage Per Minute</th>
+                        <th></th>
+                        <th class="text-right">Damage Dealt Per Minute</th>
                         <th class="text-right">Damage Taken Per Hour</th>
                         <th class="text-right">XP Per Hour</th>
                     </tr>
                     </thead>
                     <tbody>
                         <tr v-for="m in monsterRankings" :key="m.name">
-                            <td class="w-12">
-                                <div class="avatar">
-                                    <div class="mask mask-square rounded-lg w-12 h-12">
-                                        <img :src="m.imgSource" :alt="m.name" />
+                            <td>
+                                <div class="flex items-center gap-3">
+                                    <div class="avatar">
+                                        <div class="mask mask-square rounded-lg w-12 h-12">
+                                            <img :src="m.imgSource" :alt="m.name" />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="font-bold">{{ m.name }}</div>
+                                        <div class="text-xs flex gap-2 items-center max-md:hidden">
+                                            <img src="/src/assets/melee.png" class="mask mask-squircle w-6" alt="Melee" /> {{ m.meleeDamagePerHour }}
+                                            <img src="/src/assets/magic.png" class="mask mask-squircle w-6" alt="Magic" /> {{ m.magicDamagePerHour }}
+                                            <img src="/src/assets/ranged.png" class="mask mask-squircle w-6" alt="Ranged" /> {{ m.rangedDamagePerHour }}
+                                            <img src="/src/assets/health.png" class="mask mask-squircle w-6" alt="Health" /> {{ m.combatStats.health }}
+                                        </div>
                                     </div>
                                 </div>
                             </td>
