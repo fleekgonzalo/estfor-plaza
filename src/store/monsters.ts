@@ -112,7 +112,7 @@ export const useMonsterStore = defineStore({
                     damageTakenPerHour = Math.ceil(m.info.numSpawned / 1000 * m.combatStats.health / damagePerMinute) * damageTakenPerMinute
                     killsPerHour = m.info.numSpawned / 1000
                 }
-                const xpPerHour = killsPerHour * m.info.xpPerHour
+                const xpPerHour = (killsPerHour / (m.info.numSpawned / 1000)) * m.info.xpPerHour
                 
                 monsterRankings.push({
                     name: monsterNames[m.actionId] || 'Unknown',

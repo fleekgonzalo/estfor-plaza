@@ -33,7 +33,7 @@
                             </td>
                             <td class="text-right">{{ m.damagePerMinute }}</td>
                             <td class="text-right">{{ m.damageTakenPerHour }}</td>
-                            <td class="text-right">{{ m.xpPerHour }}</td>
+                            <td class="text-right">{{ m.xpPerHour.toFixed(0) }}</td>
                         </tr>
                     </tbody>
                 </table>
