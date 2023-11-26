@@ -1,0 +1,4 @@
+[submodule "estfor-contracts"]
+	path = estfor-contracts
+	url = git@github.com:PaintSwap/estfor-contracts.git
+	branch = main
