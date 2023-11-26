@@ -6,14 +6,14 @@
                     <!-- head -->
                     <thead>
                     <tr>
-                        <th></th>
-                        <th class="text-right"><img src="/src/assets/melee.png" class="mask mask-squircle md:w-10 w-6 mx-auto" alt="Melee" /></th>
-                        <th class="text-right"><img src="/src/assets/magic.png" class="mask mask-squircle md:w-10 w-6 mx-auto" alt="Magic" /></th>
-                        <th class="text-right"><img src="/src/assets/ranged.png" class="mask mask-squircle md:w-10 w-6 mx-auto" alt="Ranged" /></th>
-                        <th class="text-right"><img src="/src/assets/melee_def.png" class="mask mask-squircle md:w-10 w-6 mx-auto" alt="Melee Defence" /></th>
-                        <th class="text-right"><img src="/src/assets/magic_def.png" class="mask mask-squircle md:w-10 w-6 mx-auto" alt="Magic Defence" /></th>
-                        <th class="text-right"><img src="/src/assets/ranged_def.png" class="mask mask-squircle md:w-10 w-6 mx-auto" alt="Ranged Defence" /></th>
-                        <th class="text-right"><img src="/src/assets/health.png" class="mask mask-squircle md:w-10 w-6 mx-auto" alt="Health" /></th>
+                        <th class="w-20"></th>
+                        <th class="text-right"><div class="tooltip tooltip-primary tooltip-bottom w-full" data-tip="Melee"><img src="/src/assets/melee.png" class="mask mask-squircle md:w-10 w-6 mx-auto" alt="Melee" /></div></th>
+                        <th class="text-right"><div class="tooltip tooltip-primary tooltip-bottom w-full" data-tip="Magic"><img src="/src/assets/magic.png" class="mask mask-squircle md:w-10 w-6 mx-auto" alt="Magic" /></div></th>
+                        <th class="text-right"><div class="tooltip tooltip-primary tooltip-bottom w-full" data-tip="Ranged"><img src="/src/assets/ranged.png" class="mask mask-squircle md:w-10 w-6 mx-auto" alt="Ranged" /></div></th>
+                        <th class="text-right"><div class="tooltip tooltip-primary tooltip-bottom w-full" data-tip="Melee Defence"><img src="/src/assets/melee_def.png" class="mask mask-squircle md:w-10 w-6 mx-auto" alt="Melee Defence" /></div></th>
+                        <th class="text-right"><div class="tooltip tooltip-primary tooltip-bottom w-full" data-tip="Magic Defence"><img src="/src/assets/magic_def.png" class="mask mask-squircle md:w-10 w-6 mx-auto" alt="Magic Defence" /></div></th>
+                        <th class="text-right"><div class="tooltip tooltip-primary tooltip-bottom w-full" data-tip="Ranged Defence"><img src="/src/assets/ranged_def.png" class="mask mask-squircle md:w-10 w-6 mx-auto" alt="Ranged Defence" /></div></th>
+                        <th class="text-right"><div class="tooltip tooltip-primary tooltip-bottom w-full" data-tip="Health"><img src="/src/assets/health.png" class="mask mask-squircle md:w-10 w-6 mx-auto" alt="Health" /></div></th>
                     </tr>
                     </thead>
                     <tbody>

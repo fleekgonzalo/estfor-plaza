@@ -17,9 +17,9 @@ export interface MonsterRank {
     damageTakenPerHour: number,
     xpPerHour: number,
     imgSource: string,
-    meleeDamagePerHour: number,
-    rangedDamagePerHour: number,
-    magicDamagePerHour: number,
+    meleeDamagePerMinute: number,
+    rangedDamagePerMinute: number,
+    magicDamagePerMinute: number,
     combatStats: CombatStats,
 }
 
@@ -101,10 +101,10 @@ export const useMonsterStore = defineStore({
 
             for (const m of state.monsters) {
                 const damagePerMinute = calculateDamage(attackSkill, isMelee ? m.combatStats.meleeDefence : isRanged ? m.combatStats.rangedDefence : isMagic ? m.combatStats.magicDefence : 0)
-                const meleeDamagePerHour = calculateDamage(m.combatStats.melee, combatStats.meleeDefence)
-                const rangedDamagePerHour = calculateDamage(m.combatStats.ranged, combatStats.rangedDefence)
-                const magicDamagePerHour = calculateDamage(m.combatStats.magic, combatStats.magicDefence)
-                const damageTakenPerMinute = meleeDamagePerHour + rangedDamagePerHour + magicDamagePerHour
+                const meleeDamagePerMinute = calculateDamage(m.combatStats.melee, combatStats.meleeDefence)
+                const rangedDamagePerMinute = calculateDamage(m.combatStats.ranged, combatStats.rangedDefence)
+                const magicDamagePerMinute = calculateDamage(m.combatStats.magic, combatStats.magicDefence)
+                const damageTakenPerMinute = meleeDamagePerMinute + rangedDamagePerMinute + magicDamagePerMinute
                 
                 let killsPerHour = Math.floor(damagePerMinute / m.combatStats.health * 60)
                 let damageTakenPerHour = damageTakenPerMinute * 60
@@ -118,9 +118,9 @@ export const useMonsterStore = defineStore({
                     name: monsterNames[m.actionId] || 'Unknown',
                     damagePerMinute,
                     damageTakenPerHour,
-                    meleeDamagePerHour,
-                    rangedDamagePerHour,
-                    magicDamagePerHour,
+                    meleeDamagePerMinute,
+                    rangedDamagePerMinute,
+                    magicDamagePerMinute,
                     xpPerHour,
                     combatStats: m.combatStats,
                     imgSource: `${MEDIA_URL}/monsters/${monsterImageMap[m.actionId] || 'monster_1_9zp1zn5o.jpg'}`,
