@@ -9,10 +9,10 @@
                 <ItemSelect :items="armItems" label="Arms" @update:model-value="onUpdate" v-model="equippedItems.arms" />
                 <ItemSelect :items="legItems" label="Legs" @update:model-value="onUpdate" v-model="equippedItems.legs" />
                 <ItemSelect :items="feetItems" label="Feet" @update:model-value="onUpdate" v-model="equippedItems.feet" />
-                <ItemSelect :items="rightHandItems" label="Right Hand" @update:model-value="onUpdate" v-model="equippedItems.rightHand" />
+                <ItemSelect :items="rightHandItems" label="Right Hand" @update:model-value="onUpdate" v-model="equippedItems.rightHand" :empty-equipment="false" />
                 <ItemSelect v-if="isMelee" :items="leftHandItems" label="Left Hand" @update:model-value="onUpdate" v-model="equippedItems.leftHand" />
-                <ItemSelect v-if="isMagic" :items="magicBagItems" label="Magic Bag" @update:model-value="onUpdate" v-model="equippedItems.magicBag" />
-                <ItemSelect v-if="isRanged" :items="quiverItems" label="Quiver" @update:model-value="onUpdate" v-model="equippedItems.quiver" disabled />
+                <ItemSelect v-if="isMagic" :items="magicBagItems" label="Magic Bag" @update:model-value="onUpdate" v-model="equippedItems.magicBag" :empty-equipment="false" />
+                <ItemSelect v-if="isRanged" :items="quiverItems" label="Quiver" @update:model-value="onUpdate" v-model="equippedItems.quiver" disabled :empty-equipment="false" />
             </div>
         </div>
     </div>

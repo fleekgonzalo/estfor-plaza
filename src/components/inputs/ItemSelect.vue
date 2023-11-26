@@ -1,6 +1,6 @@
 <template>
     <select class="select select-bordered w-full md:select-md select-xs" v-model="value" :disabled="props.disabled">
-        <option disabled selected :value="undefined">{{ props.label }}</option>
+        <option :disabled="!props.emptyEquipment" selected :value="undefined">{{ props.label }} <span v-if="props.emptyEquipment">(No Equipment)</span></option>
         <option v-for="item in props.items" :key="item.tokenId" :value="item.tokenId">
             {{ item.name }}
         </option>
@@ -31,6 +31,10 @@ const props = defineProps({
         type: Boolean,
         default: false
     },
+    emptyEquipment: {
+        type: Boolean,
+        default: true    
+    }
 })
 
 const value = computed({
