@@ -105,14 +105,17 @@ export const useMonsterStore = defineStore({
                 const rangedDamagePerMinute = calculateDamage(m.combatStats.ranged, combatStats.rangedDefence)
                 const magicDamagePerMinute = calculateDamage(m.combatStats.magic, combatStats.magicDefence)
                 const damageTakenPerMinute = meleeDamagePerMinute + rangedDamagePerMinute + magicDamagePerMinute
+
+                const numSpawned = m.info.numSpawned / 1000
+                const xpPerKill = m.info.xpPerHour / numSpawned
                 
-                let killsPerHour = Math.floor(damagePerMinute / m.combatStats.health * 60)
+                let killsPerHour = Math.floor((damagePerMinute / m.combatStats.health) * 60)
                 let damageTakenPerHour = damageTakenPerMinute * 60
-                if (killsPerHour > m.info.numSpawned / 1000) {
-                    damageTakenPerHour = Math.ceil(m.info.numSpawned / 1000 * m.combatStats.health / damagePerMinute) * damageTakenPerMinute
-                    killsPerHour = m.info.numSpawned / 1000
+                if (killsPerHour > numSpawned) {
+                    damageTakenPerHour = Math.ceil((numSpawned * m.combatStats.health) / damagePerMinute) * damageTakenPerMinute
+                    killsPerHour = numSpawned
                 }
-                const xpPerHour = (killsPerHour / (m.info.numSpawned / 1000)) * m.info.xpPerHour
+                const xpPerHour = killsPerHour * xpPerKill
                 
                 monsterRankings.push({
                     name: monsterNames[m.actionId] || 'Unknown',
