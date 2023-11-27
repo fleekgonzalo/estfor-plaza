@@ -6,9 +6,21 @@
                     <thead>
                     <tr>
                         <th></th>
-                        <th class="text-right">Damage Dealt Per Minute</th>
-                        <th class="text-right">Damage Taken Per Hour</th>
-                        <th class="text-right">XP Per Hour</th>
+                        <th class="text-right"><div class="flex gap-1 items-center justify-end">Damage Dealt Per Minute 
+                            <ChevronUpDownIcon v-if="currentSort != 'damagePerMinute'" class="w-6 text-white hover:text-gray-400 cursor-pointer" @click="updateSort('damagePerMinute', 'desc')"/>
+                            <ChevronDownIcon v-else-if="currentSort == 'damagePerMinute' && currentDirection == 'desc'" class="w-6 text-white hover:text-gray-400 cursor-pointer" @click="updateSort('damagePerMinute', 'asc')"/>
+                            <ChevronUpIcon v-else class="w-6 text-white hover:text-gray-400 cursor-pointer" @click="updateSort(null, 'desc')"/>
+                        </div></th>
+                        <th class="text-right"><div class="flex gap-1 items-center justify-end">Damage Taken Per Hour 
+                            <ChevronUpDownIcon v-if="currentSort != 'damageTakenPerHour'" class="w-6 text-white hover:text-gray-400 cursor-pointer" @click="updateSort('damageTakenPerHour', 'desc')"/>
+                            <ChevronDownIcon v-else-if="currentSort == 'damageTakenPerHour' && currentDirection == 'desc'" class="w-6 text-white hover:text-gray-400 cursor-pointer" @click="updateSort('damageTakenPerHour', 'asc')"/>
+                            <ChevronUpIcon v-else class="w-6 text-white hover:text-gray-400 cursor-pointer" @click="updateSort(null, 'desc')"/>
+                        </div></th>
+                        <th class="text-right"><div class="flex gap-1 items-center justify-end">XP Per Hour 
+                            <ChevronUpDownIcon v-if="currentSort != 'xpPerHour'" class="w-6 text-white hover:text-gray-400 cursor-pointer" @click="updateSort('xpPerHour', 'desc')"/>
+                            <ChevronDownIcon v-else-if="currentSort == 'xpPerHour' && currentDirection == 'desc'" class="w-6 text-white hover:text-gray-400 cursor-pointer" @click="updateSort('xpPerHour', 'asc')"/>
+                            <ChevronUpIcon v-else class="w-6 text-white hover:text-gray-400 cursor-pointer" @click="updateSort(null, 'desc')"/>
+                        </div></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -44,9 +56,31 @@
 
 <script setup lang="ts">
 import { useMonsterStore } from '../store/monsters'
-import { computed } from 'vue'
-
+import { computed, ref } from 'vue'
+import { ChevronUpDownIcon, ChevronDownIcon, ChevronUpIcon } from '@heroicons/vue/24/solid'
 
 const monsterStore = useMonsterStore()
-const monsterRankings = computed(() => monsterStore.getMonsterRankings.slice(0, 10))
+const monsterRankings = computed(() => {
+    const storeRankings = [...monsterStore.getMonsterRankings]
+    if (currentSort.value) {
+        storeRankings.sort((a, b) => {
+            if (currentDirection.value == 'desc') {
+                // @ts-ignore
+                return b[currentSort.value] > a[currentSort.value] ? 1 : -1
+            } else {
+                // @ts-ignore
+                return a[currentSort.value] > b[currentSort.value] ? 1 : -1
+            }
+        })
+    }
+    return storeRankings.slice(0, 10)
+})
+
+const currentSort = ref<string | null>(null)
+const currentDirection = ref('desc')
+
+const updateSort = (sort: string | null, direction: string) => {
+    currentSort.value = sort
+    currentDirection.value = direction
+}
 </script>

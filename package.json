@@ -10,7 +10,8 @@
     "build:scripts": "tsx ./scripts/copyDataFiles.ts"
   },
   "dependencies": {
-    "@kolirt/vue-web3-auth": "^0.1.4",    
+    "@heroicons/vue": "^2.0.18",
+    "@kolirt/vue-web3-auth": "^0.1.4",
     "@paintswap/estfor-definitions": "^1.0.70",
     "@vueuse/core": "^10.6.1",
     "@vueuse/head": "^2.0.0",
